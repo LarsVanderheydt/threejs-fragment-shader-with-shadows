@@ -20,7 +20,7 @@ export default class Helper {
     }, false);
   }
 
-  draw(camera) {
+  draw() {
     /* Map mouse position to world vector */
     this.vec.set(
       (this.mousePos.x / window.innerWidth) * 2 - 1,
@@ -28,10 +28,10 @@ export default class Helper {
       0.5
     );
 
-    this.vec.unproject(camera);
-    this.vec.sub(camera.position).normalize();
-    const distance = -camera.position.z / this.vec.z;
-    this.pos.copy(camera.position).add(this.vec.multiplyScalar(distance));
+    // this.vec.unproject(camera);
+    // this.vec.sub(camera.position).normalize();
+    // const distance = -camera.position.z / this.vec.z;
+    // this.pos.copy(camera.position).add(this.vec.multiplyScalar(distance));
   }
 
   /**

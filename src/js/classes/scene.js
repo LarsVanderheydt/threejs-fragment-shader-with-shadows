@@ -1,8 +1,11 @@
+import Helper from "./helpers";
+
 export default class Scene {
   constructor() {
     /* Create scene */
     this.scene = new THREE.Scene();
-
+    this.raycaster = new THREE.Raycaster();
+    this.helper = new Helper();
 
     /* Create camera */
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -19,7 +22,7 @@ export default class Scene {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.scene.background = new THREE.Color( 0x000000 );
+    // this.scene.background = new THREE.Color( 0x000000 );
     // this.renderer.setClearColor( 0x000000, 0 ); // the default
 
 
@@ -31,6 +34,23 @@ export default class Scene {
   }
 
   draw() {
+    this.raycaster.setFromCamera(this.helper.vec, this.camera)
+
+    // calculate objects intersecting the picking ray
+    const intersects = this.raycaster.intersectObjects( this.scene.children );
+
+    for ( let i = 0; i < intersects.length; i++ ) {
+      if (intersects[i].object.name === 'lava') {
+
+      }
+    }
+
+    const isLava = intersects.find(e => e.object.name === 'lava');
+    if (!isLava) {
+      // this.scene.getObjectByName('lava').scale.set(this.hovertime, this.hovertime, this.hovertime);
+    }
+
+    this.helper.draw();
     this.renderer.render(this.scene, this.camera);
   }
 

@@ -5,7 +5,7 @@ export default `
 
 #define HALF_PI 1.5707963267948966
 
-float noise (in vec2 st) {
+float fnoise (in vec2 st) {
   vec2 i = floor(st);
   vec2 f = fract(st);
 

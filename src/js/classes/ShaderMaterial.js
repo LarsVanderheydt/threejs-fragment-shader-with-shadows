@@ -6,7 +6,8 @@ export default class ShaderMaterial {
     this.uniforms = {
       u_time: { value: 0 },
       u_mouse: { value: new THREE.Vector2(0, 0) },
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      u_hover: { value: 1.0 },
     };
 
     this.material = new THREE.ShaderMaterial( {
@@ -14,13 +15,11 @@ export default class ShaderMaterial {
         THREE.UniformsLib.common,
         THREE.UniformsLib.lights,
         this.uniforms,
-        {
-          lightIntensity: {type: 'f', value: 1.0},
-        }
       ]),
       fragmentShader: Fragment[ mat ],
-      vertexShader: Vertex.basic,
+      vertexShader: Vertex.distort,
       lights: true,
+      side: THREE.DoubleSide,
       transparent: true,
     });
   }
